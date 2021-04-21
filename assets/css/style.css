@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+  }
+  
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.headerPhrase {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.quiz {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 60%;
+    position: relative;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btn {
+margin: 10px;
+}
