@@ -2,10 +2,22 @@ var highScores = document.querySelector(".highScores");
 var timeLeft = document.querySelector(".timeLeft");
 var startButton = document.querySelector("#start");
 
+
+var questions = [
+  {
+    question: "What does CSS stand for?",
+    choices: [ "Cascading Style Sheets","Current Style Sheets","Cascading Sheet Style","Current Sheet Style"]
+
+  }
+]
+
+
 // function to complete game, need to build out
 function gameOver() {
     console.log("game over");
 }
+
+
 
 // create timer for completing quiz.
 var secondsLeft = 60;
