@@ -1,3 +1,11 @@
+/* adding variables for consistent color scheme*/
+:root {
+    --green: #18453b;
+    --whitetext: ghostwhite;
+    --whitebackground: ghostwhite;
+    --sidebar: 150px;
+}
+
 * {
     box-sizing: border-box;
   }
@@ -38,5 +46,13 @@
 }
 
 .btn {
-margin: 10px;
+
+    margin: 10px;
+}
+
+.answerBox {
+    margin: 10px;
+    padding: 10px;
+    color: var(--whitetext);
+    background-color: var(--green);
 }

@@ -7,10 +7,10 @@ var highScores = document.querySelector(".scores")
 var introduction = document.querySelector(".introduction")
 var headerIntro = document.querySelector(".headerIntro");
 
-var currentQuestion = [0]
+
 
 // variable to hold questions and answers
-var questions = [
+var questionsList = [
   {
     question: "What does CSS stand for?",
     choices: [ "Cascading Style Sheets","Current Style Sheets","Cascading Sheet Style","Current Sheet Style"],
@@ -43,8 +43,9 @@ var questions = [
 },
 ]
 
-// variable to refference the current question being asked
-var currentChallenge = questions[currentQuestion];
+// variables to refference the current question being asked
+var currentQuestion = [0]
+var currentChallenge = questionsList[currentQuestion];
 
 // function to complete game, need to build out
 function gameOver() {
@@ -70,16 +71,27 @@ function setTime() {
   }, 1000);
 }
 
+// gets question data and displays it on screen.
 function pickQuestion(){
-
-}
+  headerIntro.textContent = currentChallenge.question;
+  // wipe out any previous answers
+  questions.innerHTML = "";
+  currentChallenge.choices.forEach(function(answer, i) {
+    var answerBox = document.createElement("li");
+    answerBox.setAttribute("class", "answerBox");
+    answerBox.textContent = answer;
+    questions.appendChild(answerBox);
+    });
+  // sets variable to move to next questions in list
+  currentQuestion ++;
+  }
 
 
 function startQuiz() {
-  // hide intro paragraph.
+  // hide intro paragraph and start button.
   introduction.setAttribute("hidden","");
-  headerIntro.textContent = currentChallenge.question;
-
+  startButton.setAttribute("hidden","")
+  pickQuestion();
 
 }
 
