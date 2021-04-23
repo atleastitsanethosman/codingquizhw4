@@ -44,7 +44,7 @@ var questionsList = [
 ]
 
 // variables to refference the current question being asked
-var currentQuestion = [0]
+var currentQuestion = 0
 var currentChallenge = questionsList[currentQuestion];
 
 // function to complete game, need to build out
@@ -73,6 +73,10 @@ function setTime() {
 
 // gets question data and displays it on screen.
 function pickQuestion(){
+  // check if user has reached end of questions.
+  if (currentQuestion + 1 > questionsList.length) {
+    gameOver();
+  } else {
   headerIntro.textContent = currentChallenge.question;
   // wipe out any previous answers
   questions.innerHTML = "";
@@ -85,7 +89,7 @@ function pickQuestion(){
   // sets variable to move to next questions in list
   currentQuestion ++;
   }
-
+}
 
 function startQuiz() {
   // hide intro paragraph and start button.
