@@ -3,13 +3,20 @@
     --green: #18453b;
     --whitetext: ghostwhite;
     --whitebackground: ghostwhite;
-    --sidebar: 150px;
 }
 
 * {
     box-sizing: border-box;
   }
-  
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
 .header {
     display: flex;
     flex-direction: row;
@@ -63,3 +70,4 @@
     cursor: grab;
     opacity: 75%;
 }
+

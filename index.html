@@ -25,10 +25,16 @@
             </div>
             <p class="introduction">
                 Try to answer all the following questions within the minute allowed.  If you get an answer wrong time will be subtracted from the total time you have left.
+                You will recieve 10 points for each correct answer and a bonus point for each second remaining IF you get at least one question right.
             </p>
             <button id="start" class="btn">Start Game</button>
             <ul class="questions"></ul>
-            <div class="feedback"></div>
+            <div class="feedback"><h3></h3></div>
+            <div id="submitScore" class="hide">
+                <label for="initials">Enter initials:</label>
+                <input type="text" name="initials" maxlength="4" id="initials">
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
             <ul class="highScores"></ul>
         </div>
 

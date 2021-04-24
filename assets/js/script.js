@@ -6,7 +6,9 @@ var questions = document.querySelector(".questions");
 var feedback = document.querySelector(".feedback");
 var introduction = document.querySelector(".introduction");
 var headerIntro = document.querySelector(".headerIntro");
-
+var submitScore = document.querySelector("#submitScore");
+var submitButton = document.querySelector("#submit-button");
+var initialsBox = document.querySelector("#initials");
 
 var score = 0
 
@@ -48,11 +50,43 @@ var questionsList = [
 var currentQuestion = 0;
 var currentChallenge = questionsList[currentQuestion];
 
+// variable to note if game is over to check in functions
+var gameEnded = false
+
 // function to complete game, need to build out
 function gameOver() {
-    console.log("game over");
+    gameEnded = true;
+    questions.innerHTML = "";  
+    // wipe out answers section.
+    questions.innerHTML = "";  
+    if (score > 0) {
+      score += secondsLeft
+      }  else score = 0;
+    headerIntro.textContent = "Your score was " + score;
+    submitScore.setAttribute("class", "show");
 }
 
+// add event listener and function for submitting scores.
+submitButton.addEventListener("click", function(event){
+  event.preventDefault();
+  
+  // variable to record current score list.
+  var currentScore = {
+    finalScore: score,
+    playerInitials: initialsBox.value.trim()
+  };
+  
+  // make variable for score list by either checking to see if there is an array or making an empty one.
+  var allScores = [];
+  var allScores = JSON.parse(window.localStorage.getItem("scoresList")) || [];
+  console.log(allScores)
+  console.log(currentScore)
+  // append current score to array.
+  allScores.push(currentScore);
+  // send scores and initials to local storage.
+  localStorage.setItem("scoresList", JSON.stringify(allScores));
+  location.reload();
+});
 
 
 // create timer for completing quiz.
@@ -67,6 +101,8 @@ function setTime() {
       clearInterval(timerInterval);
       
       gameOver();
+    } else if (gameEnded == true) {
+      clearInterval(timerInterval);
     }
 
   }, 1000);
@@ -95,36 +131,38 @@ function pickQuestion(){
 questions.addEventListener("click", function(event) {
     var selection = event.target.textContent;
     if (selection == questionsList[currentQuestion].answer ) {
-      var correct = document.createElement("h3");
-      correct.textContent = "Correct!";
-      feedback.appendChild(correct);
+      feedback.firstChild.textContent = "correct!"
       score += 10;
     }  else {
-        var incorrect = document.createElement("h3");
-        incorrect.textContent = "incorrect!";
-        feedback.appendChild(incorrect);
+        feedback.firstChild.textContent = "incorrect!"
         if (secondsLeft <= 10) {
           secondsLeft = 1
         } else {
           secondsLeft -= 10;
         }
     }
-  // sets variable to move to next questions in list
-  currentQuestion ++;
-  pickQuestion();
+  // flash feedback for second then up variable and move to next questions in list
+  setTimeout(function() {
+    feedback.firstChild.textContent = "";
+    currentQuestion ++;
+    console.log(score)
+    pickQuestion();
+  
+  }, 500);
 });
 
 
-
+// function to start the various functions that run during quiz.
 function startQuiz() {
   // hide intro paragraph and start button.
   introduction.setAttribute("hidden","");
-  startButton.setAttribute("hidden","")
+  startButton.setAttribute("hidden","");
+  highScores.setAttribute("hidden","")
   pickQuestion();
 
 }
 
-
+// add event listener for buttom to start quiz.
 startButton.addEventListener("click", function(event) {
   event.preventDefault();
   setTime();
