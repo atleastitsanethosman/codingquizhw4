@@ -3,11 +3,12 @@ var highScores = document.querySelector(".highScores");
 var timeLeft = document.querySelector(".timeLeft");
 var startButton = document.querySelector("#start");
 var questions = document.querySelector(".questions");
-var highScores = document.querySelector(".scores")
-var introduction = document.querySelector(".introduction")
+var feedback = document.querySelector(".feedback");
+var introduction = document.querySelector(".introduction");
 var headerIntro = document.querySelector(".headerIntro");
 
 
+var score = 0
 
 // variable to hold questions and answers
 var questionsList = [
@@ -44,7 +45,7 @@ var questionsList = [
 ]
 
 // variables to refference the current question being asked
-var currentQuestion = 0
+var currentQuestion = 0;
 var currentChallenge = questionsList[currentQuestion];
 
 // function to complete game, need to build out
@@ -75,21 +76,45 @@ function setTime() {
 function pickQuestion(){
   // check if user has reached end of questions.
   if (currentQuestion + 1 > questionsList.length) {
-    gameOver();
+      gameOver();
   } else {
-  headerIntro.textContent = currentChallenge.question;
+  headerIntro.textContent = questionsList[currentQuestion].question;
   // wipe out any previous answers
   questions.innerHTML = "";
-  currentChallenge.choices.forEach(function(answer, i) {
+  // create list item for each possible answer.
+  questionsList[currentQuestion].choices.forEach(function(answer, i) {
     var answerBox = document.createElement("li");
     answerBox.setAttribute("class", "answerBox");
     answerBox.textContent = answer;
     questions.appendChild(answerBox);
     });
-  // sets variable to move to next questions in list
-  currentQuestion ++;
   }
 }
+
+// event listener with function to check answer
+questions.addEventListener("click", function(event) {
+    var selection = event.target.textContent;
+    if (selection == questionsList[currentQuestion].answer ) {
+      var correct = document.createElement("h3");
+      correct.textContent = "Correct!";
+      feedback.appendChild(correct);
+      score += 10;
+    }  else {
+        var incorrect = document.createElement("h3");
+        incorrect.textContent = "incorrect!";
+        feedback.appendChild(incorrect);
+        if (secondsLeft <= 10) {
+          secondsLeft = 1
+        } else {
+          secondsLeft -= 10;
+        }
+    }
+  // sets variable to move to next questions in list
+  currentQuestion ++;
+  pickQuestion();
+});
+
+
 
 function startQuiz() {
   // hide intro paragraph and start button.

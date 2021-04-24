@@ -50,9 +50,16 @@
     margin: 10px;
 }
 
+/* styling for the options to answer the questions as they are populated */
 .answerBox {
     margin: 10px;
     padding: 10px;
     color: var(--whitetext);
     background-color: var(--green);
+}
+
+/* styling to change cursor and show which choices is in focus */
+.answerBox:hover {
+    cursor: grab;
+    opacity: 75%;
 }
