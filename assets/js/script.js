@@ -126,31 +126,38 @@ function pickQuestion(){
     });
   }
 }
+// flash feedback for half second then up variable and move to next questions in list
+function response(){
+  setTimeout(function() {
+    feedback.firstChild.textContent = "";
+    // currentQuestion ++;
+    console.log(score)
+    console.log(currentQuestion)
+  }, 500);
+};
 
-// event listener with function to check answer
+// event listener with function to check answer.
 questions.addEventListener("click", function(event) {
     var selection = event.target.textContent;
-    if (selection == questionsList[currentQuestion].answer ) {
+    if (selection == questionsList[currentQuestion].answer) {
       feedback.firstChild.textContent = "correct!"
       score += 10;
+      currentQuestion ++;
+      response();
+      pickQuestion();
     }  else {
         feedback.firstChild.textContent = "incorrect!"
         if (secondsLeft <= 10) {
-          secondsLeft = 1
+          response();
+          gameOver();
         } else {
           secondsLeft -= 10;
+          response();
+          currentQuestion ++;
+          pickQuestion();
         }
     }
-  // flash feedback for second then up variable and move to next questions in list
-  setTimeout(function() {
-    feedback.firstChild.textContent = "";
-    currentQuestion ++;
-    console.log(score)
-    pickQuestion();
-  
-  }, 500);
 });
-
 
 // function to start the various functions that run during quiz.
 function startQuiz() {
