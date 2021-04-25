@@ -17,9 +17,9 @@ var score = 0
 // variable to hold questions and answers
 var questionsList = [
   {
-    question: "What does CSS stand for?",
-    choices: [ "Cascading Style Sheets","Current Style Sheets","Cascading Sheet Style","Current Sheet Style"],
-    answer: "Cascading Style Sheets"
+    question: "What does javascript let the user do?",
+    choices: [ "break the internet","hack the matrix","interact with the webpage","cage the elephant"],
+    answer: "interact with the webpage"
   },
   {
     question: "Commonly Used data types DO NOT include:",
@@ -32,9 +32,9 @@ var questionsList = [
     answer: "parentheses"
 },
 {
-    question: "The condition in an if / else statment is enclosed within _____.",
-    choices: ["parentheses", "single quotes", "curly brackets", "square brackets"],
-    answer: "parentheses"
+    question: "Who Created Javascript?",
+    choices: ["Microsoft", "Sun Microsystems", "Oracle", "Netscape"],
+    answer: "Netscape"
 },
 {
     question: "How can we use Javascript to select an html element?",
