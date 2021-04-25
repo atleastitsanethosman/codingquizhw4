@@ -187,6 +187,7 @@ highScores.addEventListener("click", function(event){
   startButton.setAttribute("hidden","");
   highScores.setAttribute("hidden","")
   headerIntro.textContent = "List of Previous Scores"
+  homeButton.setAttribute("class", "show")
   var scoreBoard = JSON.parse(window.localStorage.getItem("scoresList"));
   console.log(scoreBoard.playerInitials);
   for (let i =0; i < scoreBoard.length; i++) {
@@ -195,7 +196,7 @@ highScores.addEventListener("click", function(event){
         scoreLine.textContent = scoreBoard[i].playerInitials + " had a score of: " + scoreBoard[i].finalScore;
         listScores.appendChild(scoreLine);
   };
-  homeButton.setAttribute("class", "show")
+  
 });
 
 // add event listener for buttom to start quiz.
