@@ -7,7 +7,12 @@
 
 * {
     box-sizing: border-box;
+
   }
+
+body {
+    background-color: var(--whitebackground);
+}
 
 .hide {
     display: none;
@@ -19,9 +24,22 @@
 
 .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     margin: 10px;
+}
+
+.highScores {
+    background-color: var(--green);
+    color: var(--whitetext);
+    padding: 10px;
+    margin: 10px;
+}
+
+.highScores:hover {
+    cursor: grab;
+    opacity: 75%;
 }
 
 .headerPhrase {
@@ -39,6 +57,7 @@
     width: 100%;
     position: relative;
     flex-wrap: wrap;
+
 }
 
 .quiz {
@@ -53,7 +72,10 @@
 }
 
 .btn {
+    margin: 10px;
+}
 
+#homescreen {
     margin: 10px;
 }
 

@@ -9,6 +9,8 @@ var headerIntro = document.querySelector(".headerIntro");
 var submitScore = document.querySelector("#submitScore");
 var submitButton = document.querySelector("#submit-button");
 var initialsBox = document.querySelector("#initials");
+var homeButton = document.querySelector("#homescreen");
+var listScores = document.querySelector(".listScores");
 
 var score = 0
 
@@ -56,9 +58,9 @@ var gameEnded = false
 // function to complete game, need to build out
 function gameOver() {
     gameEnded = true;
-    questions.innerHTML = "";  
-    // wipe out answers section.
-    questions.innerHTML = "";  
+    questions.innerHTML = "";
+    timeLeft.setAttribute("class", "hide")
+    homeButton.setAttribute("class", "show")
     if (score > 0) {
       score += secondsLeft
       }  else score = 0;
@@ -79,10 +81,10 @@ submitButton.addEventListener("click", function(event){
   // make variable for score list by either checking to see if there is an array or making an empty one.
   var allScores = [];
   var allScores = JSON.parse(window.localStorage.getItem("scoresList")) || [];
-  console.log(allScores)
-  console.log(currentScore)
+  
   // append current score to array.
   allScores.push(currentScore);
+  
   // send scores and initials to local storage.
   localStorage.setItem("scoresList", JSON.stringify(allScores));
   location.reload();
@@ -149,6 +151,7 @@ questions.addEventListener("click", function(event) {
         feedback.firstChild.textContent = "incorrect!"
         if (secondsLeft <= 10) {
           response();
+          secondsLeft = 0;
           gameOver();
         } else {
           secondsLeft -= 10;
@@ -158,6 +161,8 @@ questions.addEventListener("click", function(event) {
         }
     }
 });
+
+
 
 // function to start the various functions that run during quiz.
 function startQuiz() {
@@ -169,9 +174,34 @@ function startQuiz() {
 
 }
 
+// add event listener for homescreen button
+homeButton.addEventListener("click", function(event){
+  event.preventDefault();
+  location.reload();
+});
+
+// add event listener for View Scores button to build score list
+highScores.addEventListener("click", function(event){
+  event.preventDefault();
+  introduction.setAttribute("hidden","");
+  startButton.setAttribute("hidden","");
+  highScores.setAttribute("hidden","")
+  headerIntro.textContent = "List of Previous Scores"
+  var scoreBoard = JSON.parse(window.localStorage.getItem("scoresList"));
+  console.log(scoreBoard.playerInitials);
+  for (let i =0; i < scoreBoard.length; i++) {
+        var scoreLine = document.createElement("li");
+        scoreLine.setAttribute("class","scoreLine")
+        scoreLine.textContent = scoreBoard[i].playerInitials + " had a score of: " + scoreBoard[i].finalScore;
+        listScores.appendChild(scoreLine);
+  };
+  homeButton.setAttribute("class", "show")
+});
+
 // add event listener for buttom to start quiz.
 startButton.addEventListener("click", function(event) {
   event.preventDefault();
+  timeLeft.setAttribute("class", "show")
   setTime();
   startQuiz();
   });
